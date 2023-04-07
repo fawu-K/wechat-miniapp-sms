@@ -38,7 +38,7 @@ logging:
 wx:
   miniapp:
     configs:
-        appid: ${MINIAPP.APPID}
+      - appid: ${MINIAPP.APPID}
         secret: ${MINIAPP.SECRET}
         token: ${MINIAPP.TOKEN}
         aesKey: ${MINIAPP.ASE_KEY}}

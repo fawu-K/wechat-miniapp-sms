@@ -1,0 +1,28 @@
+# 访问路径
+SERVLET_CONTEXT_PATH: /
+SERVER_PORT: 8800
+
+#数据库配置
+MYSQL_HOST: localhost
+MYSQL_PORT: 3306
+MYSQL_USERNAME: root
+MYSQL_PASSWORD: root
+DATABASE: miniapp
+
+# maBatisPlus配置
+ENTITY_PATH: com.fawu.entity
+MAPPER_PATH: classpath:mapper/*.xml
+
+# 微信小程序配置
+MINIAPP:
+  #微信小程序的appid
+  APPID: wx229364b9cd249db0
+  #微信小程序的Secret
+  SECRET: test
+  #微信小程序消息服务器配置的token
+  TOKEN: test
+  #微信小程序消息服务器配置的EncodingAESKey
+  ASE_KEY: test
+
+YUN:
+  APPID: test
