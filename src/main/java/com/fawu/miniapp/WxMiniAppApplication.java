@@ -10,7 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  *
  * @author <a href="https://github.com/fawu-K">fawu.K</a>
  */
-@EnableAutoDB(entityToTable = false, tableToEntity = true)
+@EnableAutoDB(tableToEntity = true)
 @SpringBootApplication
 public class WxMiniAppApplication {
     public static void main(String[] args) {

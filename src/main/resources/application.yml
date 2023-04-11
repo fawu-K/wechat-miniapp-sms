@@ -45,6 +45,6 @@ wx:
         msgDataFormat: JSON
 
 yun:
-  appid: ${YUN.APPID}
+  apikey: ${YUN.APIKEY}
 
 

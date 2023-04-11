@@ -67,12 +67,12 @@ public class YunPianSmsApi {
     /**
      * 编码格式。发送编码格式统一用UTF-8
      */
-    private final static String ENCODING = "UTF-8";
+    public final static String ENCODING = "UTF-8";
 
     public static void main(String[] args) throws IOException {
 
         //修改为您的apikey.apikey可在官网（http://www.yunpian.com)登录后获取
-        String apikey = YunPianSmsConfig.getAppid();
+        String apikey = YunPianSmsConfig.getApikey();
 
         //修改为您要发送的手机号
         String mobile = "130xxxxxxxx";
@@ -145,16 +145,16 @@ public class YunPianSmsApi {
      * 通过模板发送短信(不推荐)
      *
      * @param apikey    apikey
-     * @param tpl_id    　模板id
-     * @param tpl_value 　模板变量值
+     * @param tplId    　模板id
+     * @param tplValue 　模板变量值
      * @param mobile    　接受的手机号
      * @return json格式字符串
      */
-    public static String tplSendSms(String apikey, long tpl_id, String tpl_value, String mobile) {
+    public static String tplSendSms(String apikey, long tplId, String tplValue, String mobile) {
         Map<String, String> params = new HashMap<>(4);
         params.put("apikey", apikey);
-        params.put("tpl_id", String.valueOf(tpl_id));
-        params.put("tpl_value", tpl_value);
+        params.put("tpl_id", String.valueOf(tplId));
+        params.put("tpl_value", tplValue);
         params.put("mobile", mobile);
         return post(URI_TPL_SEND_SMS, params);
     }

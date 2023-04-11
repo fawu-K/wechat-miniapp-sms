@@ -1,6 +1,7 @@
 package com.fawu.miniapp.config;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 /**
  * 云片短信配置
@@ -9,18 +10,19 @@ import org.springframework.beans.factory.annotation.Value;
  * @since 2023-04-03 16:03
  **/
 
+@Component
 public class YunPianSmsConfig {
     /**
      * 设置云片的短信appid
      */
-    private static String appid;
+    private static String APIKEY;
 
-    public static String getAppid() {
-        return appid;
+    public static String getApikey() {
+        return APIKEY;
     }
 
-    @Value("${yun.appid}")
-    private static void setAppid(String appid) {
-        YunPianSmsConfig.appid = appid;
+    @Value("${yun.apikey}")
+    private void setApikey(String apikey) {
+        APIKEY = apikey;
     }
 }

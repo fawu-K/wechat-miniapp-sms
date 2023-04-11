@@ -25,4 +25,4 @@ MINIAPP:
   ASE_KEY: test
 
 YUN:
-  APPID: test
+  APIKEY: test
