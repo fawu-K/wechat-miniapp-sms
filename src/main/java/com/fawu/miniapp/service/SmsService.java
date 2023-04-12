@@ -1,6 +1,7 @@
 package com.fawu.miniapp.service;
 
 import com.fawu.miniapp.dto.SmsDto;
+import com.fawu.miniapp.entity.Sms;
 import com.fawu.miniapp.vo.SmsTemplateVo;
 
 import java.util.List;
@@ -17,10 +18,10 @@ public interface SmsService {
     /**
      * 短信发送方法
      * 在该方法中会根据dto类的中的参数信息进行模板参数组装，以达到不同模板使用同一个方法
-     * @param smsDto 短信发送方法
+     * @param sms 短信发送方法
      * @return 短信发送结果
      */
-    String sendSms(SmsDto smsDto);
+    String sendSms(Sms sms);
 
     /**
      * 获取短信模板信息

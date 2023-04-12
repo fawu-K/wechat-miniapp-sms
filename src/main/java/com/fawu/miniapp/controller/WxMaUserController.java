@@ -11,7 +11,6 @@ import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.error.WxErrorException;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @AllArgsConstructor
 @Slf4j
-@RequestMapping("/wx/user/{appid}")
+@RequestMapping("/wx/user")
 public class WxMaUserController {
     private final WxMaService wxMaService;
 
@@ -31,13 +30,9 @@ public class WxMaUserController {
      * 登陆接口
      */
     @GetMapping("/login")
-    public String login(@PathVariable String appid, String code) {
+    public String login(String code) {
         if (StringUtils.isBlank(code)) {
             return "empty jscode";
-        }
-
-        if (!wxMaService.switchover(appid)) {
-            throw new IllegalArgumentException(String.format("未找到对应appid=[%s]的配置，请核实！", appid));
         }
 
         try {
@@ -60,11 +55,8 @@ public class WxMaUserController {
      * </pre>
      */
     @GetMapping("/info")
-    public String info(@PathVariable String appid, String sessionKey,
+    public String info(String sessionKey,
                        String signature, String rawData, String encryptedData, String iv) {
-        if (!wxMaService.switchover(appid)) {
-            throw new IllegalArgumentException(String.format("未找到对应appid=[%s]的配置，请核实！", appid));
-        }
 
         // 用户信息校验
         if (!wxMaService.getUserService().checkUserInfo(sessionKey, rawData, signature)) {
@@ -84,11 +76,8 @@ public class WxMaUserController {
      * </pre>
      */
     @GetMapping("/phone")
-    public String phone(@PathVariable String appid, String sessionKey, String signature,
+    public String phone(String sessionKey, String signature,
                         String rawData, String encryptedData, String iv) {
-        if (!wxMaService.switchover(appid)) {
-            throw new IllegalArgumentException(String.format("未找到对应appid=[%s]的配置，请核实！", appid));
-        }
 
         // 用户信息校验
         if (!wxMaService.getUserService().checkUserInfo(sessionKey, rawData, signature)) {

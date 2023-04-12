@@ -2,7 +2,7 @@ package com.fawu.miniapp.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.fawu.miniapp.config.YunPianSmsConfig;
-import com.fawu.miniapp.dto.SmsDto;
+import com.fawu.miniapp.entity.Sms;
 import com.fawu.miniapp.entity.SmsTemplate;
 import com.fawu.miniapp.entity.SmsTplParam;
 import com.fawu.miniapp.mapper.SmsTemplateMapper;
@@ -10,17 +10,13 @@ import com.fawu.miniapp.mapper.SmsTplParamMapper;
 import com.fawu.miniapp.service.SmsService;
 import com.fawu.miniapp.utils.YunPianSmsApi;
 import com.fawu.miniapp.vo.SmsTemplateVo;
-import com.kang.common.util.WrapperUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
-import org.springframework.util.ObjectUtils;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 /**
  * 实现类
@@ -39,19 +35,12 @@ public class SmsServiceImpl implements SmsService {
     private SmsTplParamMapper smsTplParamMapper;
 
     @Override
-    public String sendSms(SmsDto smsDto) {
-        Long tplId = smsDto.getTplId();
+    public String sendSms(Sms sms) {
+        long tplId = 5538116L;
 
         //拼接模板参数
-        StringBuilder tplValue = new StringBuilder();
-        for (Iterator<Map.Entry<String, String>> iterator = smsDto.getParams().entrySet().iterator(); iterator.hasNext(); ) {
-            Map.Entry<String, String> entry = iterator.next();
-            tplValue.append("#").append(entry.getKey()).append("#=").append(entry.getValue());
-            if (iterator.hasNext()){
-                tplValue.append("&");
-            }
-        }
-        String result = YunPianSmsApi.tplSendSms(YunPianSmsConfig.getApikey(), tplId, tplValue.toString(), smsDto.getPhone());
+        String tplValue = "#msg#=" + sms.getMessage();
+        String result = YunPianSmsApi.tplSendSms(YunPianSmsConfig.getApikey(), tplId, tplValue, sms.getPhone());
         log.debug("短信发送结果：{}", result);
         return result;
     }
